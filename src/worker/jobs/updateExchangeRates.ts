@@ -12,6 +12,7 @@ import {
     IExchangeRates,
 } from '../../db/models/ExchangeRates';
 import {Currency, Source} from '../../types';
+import socket from '../../socket';
 
 interface ICoinMarketCapResult {
     status: {
@@ -113,6 +114,7 @@ async function handler() {
         created_at: new Date(),
     };
     await new ExchangeRates(exchangeRates).save();
+    socket.emit('exchange-rates-updated', {exchangeRates});
 }
 
 function start() {

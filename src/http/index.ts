@@ -14,4 +14,5 @@ async function listen() {
 
 export default {
     listen,
+    server: app.server,
 };
