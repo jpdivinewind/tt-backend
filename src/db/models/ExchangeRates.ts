@@ -9,7 +9,7 @@ export interface IExchangeRate {
 }
 
 export interface IExchangeRates {
-    rates: IExchangeRates[];
+    rates: IExchangeRate[];
     created_at: Date;
 }
 
