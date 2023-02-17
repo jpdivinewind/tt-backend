@@ -111,7 +111,7 @@ async function handler() {
                     (result as PromiseFulfilledResult<IExchangeRate[]>).value,
             )
             .flat(),
-        created_at: new Date(),
+        createdAt: new Date(),
     };
     await new ExchangeRates(exchangeRates).save();
     socket.emit('exchange-rates-updated', {exchangeRates});

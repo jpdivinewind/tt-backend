@@ -10,7 +10,7 @@ export interface IExchangeRate {
 
 export interface IExchangeRates {
     rates: IExchangeRate[];
-    created_at: Date;
+    createdAt: Date;
 }
 
 const ExchangeRatesSchema: mongoose.Schema<IExchangeRatesDocument> =
@@ -35,7 +35,7 @@ const ExchangeRatesSchema: mongoose.Schema<IExchangeRatesDocument> =
                 },
             ],
         },
-        {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}},
+        {timestamps: true},
     );
 
 ExchangeRatesSchema.plugin(paginate);

@@ -13,7 +13,7 @@ export default function (app: FastifyInstance) {
         const currentExchangeRates = await ExchangeRates.findOne({});
         const result: IExchangeRates = currentExchangeRates?.toJSON() || {
             rates: [],
-            created_at: new Date(),
+            createdAt: new Date(),
         };
         await res.send(result);
     });
@@ -35,18 +35,18 @@ export default function (app: FastifyInstance) {
         async (req, res) => {
             const {page, from, to} = req.query;
             const query: {
-                created_at?: {
+                createdAt?: {
                     $gte?: number;
                     $lte?: number;
                 };
             } = {};
             if (from || to) {
-                query.created_at = {};
+                query.createdAt = {};
                 if (from) {
-                    query.created_at.$gte = from;
+                    query.createdAt.$gte = from;
                 }
                 if (to) {
-                    query.created_at.$lte = to;
+                    query.createdAt.$lte = to;
                 }
             }
             const paginateResult = await ExchangeRates.paginate(query, {page});
