@@ -52,6 +52,7 @@ export default function (app: FastifyInstance) {
             const paginateResult = await ExchangeRates.paginate(query, {
                 page,
                 limit: 5,
+                sort: {createdAt: -1},
             });
             await res.send({
                 rates: paginateResult.docs.map((doc) => doc.toJSON()),
