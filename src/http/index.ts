@@ -8,8 +8,7 @@ const app = Fastify({logger: log});
 routes(app);
 
 async function listen() {
-    const address = await app.listen({host: '0.0.0.0', port: PORT});
-    app.log.info(`Listening at ${address}`);
+    await app.listen({host: '0.0.0.0', port: PORT});
 }
 
 export default {
