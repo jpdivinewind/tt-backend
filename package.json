@@ -12,7 +12,10 @@
         "prepare": "husky install"
     },
     "lint-staged": {
-      "src/**/*": ["prettier --write", "eslint --fix"]
+        "src/**/*": [
+            "prettier --write",
+            "eslint --fix"
+        ]
     },
     "dependencies": {
         "dotenv": "^16.0.3",
@@ -20,9 +23,11 @@
         "mongoose": "^6.9.2",
         "mongoose-paginate-v2": "^1.7.1",
         "node-fetch": "^3.3.0",
+        "node-schedule": "^2.1.1",
         "socket.io": "^4.6.0"
     },
     "devDependencies": {
+        "@types/node-schedule": "^2.1.0",
         "@typescript-eslint/eslint-plugin": "^5.52.0",
         "@typescript-eslint/parser": "^5.52.0",
         "esbuild": "^0.17.8",
