@@ -49,7 +49,10 @@ export default function (app: FastifyInstance) {
                     query.createdAt.$lte = to;
                 }
             }
-            const paginateResult = await ExchangeRates.paginate(query, {page});
+            const paginateResult = await ExchangeRates.paginate(query, {
+                page,
+                limit: 5,
+            });
             await res.send({
                 rates: paginateResult.docs.map((doc) => doc.toJSON()),
                 page,
