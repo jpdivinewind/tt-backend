@@ -11,7 +11,7 @@ export const MONGO_URL =
 export const PORT = process.env['PORT'] ? parseInt(process.env['PORT']) : 3000;
 
 export const JOB_UPDATE_EXCHANGE_RATES_RULE =
-    process.env['JOB_UPDATE_EXCHANGE_RATES_RULE'] || '* 2 * * * *'; // every 2 minutes
+    process.env['JOB_UPDATE_EXCHANGE_RATES_RULE'] || '*/2 * * * *'; // every 2 minutes
 
 export const COINMARKETCAP_API_KEY = process.env['COINMARKETCAP_API_KEY']!;
 if (!COINMARKETCAP_API_KEY) {
