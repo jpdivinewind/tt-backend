@@ -1,5 +1,6 @@
 import {FastifyInstance} from 'fastify';
 import {ExchangeRates, IExchangeRates} from '../../db/models/ExchangeRates';
+import updateExchangeRates from '../../worker/jobs/updateExchangeRates';
 
 interface IGetRatesHistoryQuerystring {
     page?: number;
@@ -56,4 +57,10 @@ export default function (app: FastifyInstance) {
             });
         },
     );
+
+    // TODO: use some admin credentials?
+    app.post('/rates/update', async (_, res) => {
+        await updateExchangeRates.handler();
+        await res.send('OK');
+    });
 }
