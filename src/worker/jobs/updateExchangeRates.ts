@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import schedule from 'node-schedule';
 import {log} from '../../logger';
 import {
-    JOB_UPDATE_EXCHANGE_RATE_RULE,
+    JOB_UPDATE_EXCHANGE_RATES_RULE,
     COINMARKETCAP_API_KEY,
     CRYPTOCOMPARE_API_KEY,
 } from '../../config';
@@ -88,40 +88,42 @@ function createRequest(source: Source): Promise<IExchangeRate[]> {
     }
 }
 
+async function handler() {
+    const results = await Promise.allSettled(
+        Object.values(Source).map(createRequest),
+    );
+    const exchangeRates: IExchangeRates = {
+        rates: results
+            .filter((result) => {
+                if (result.status === 'fulfilled') {
+                    return true;
+                }
+                log.error(
+                    `update-exchange-rates job error: ${
+                        (result.reason as Error).message
+                    }`,
+                );
+                return false;
+            })
+            .map(
+                (result) =>
+                    (result as PromiseFulfilledResult<IExchangeRate[]>).value,
+            )
+            .flat(),
+        created_at: new Date(),
+    };
+    await new ExchangeRates(exchangeRates).save();
+}
+
 function start() {
     schedule.scheduleJob(
         'update-exchange-rates',
-        JOB_UPDATE_EXCHANGE_RATE_RULE,
-        async () => {
-            const results = await Promise.allSettled(
-                Object.values(Source).map(createRequest),
-            );
-            const currentExchangeRates: IExchangeRates = {
-                rates: results
-                    .filter((result) => {
-                        if (result.status === 'fulfilled') {
-                            return true;
-                        }
-                        log.error(
-                            `updateExchangeRate job error: ${
-                                (result.reason as Error).message
-                            }`,
-                        );
-                        return false;
-                    })
-                    .map(
-                        (result) =>
-                            (result as PromiseFulfilledResult<IExchangeRate[]>)
-                                .value,
-                    )
-                    .flat(),
-                created_at: new Date(),
-            };
-            await new ExchangeRates(currentExchangeRates).save();
-        },
+        JOB_UPDATE_EXCHANGE_RATES_RULE,
+        handler,
     );
 }
 
 export default {
     start,
+    handler,
 };

@@ -1,7 +1,7 @@
-import updateExchangeRate from './jobs/updateExchangeRate';
+import updateExchangeRates from './jobs/updateExchangeRates';
 
 function start() {
-    updateExchangeRate.start();
+    updateExchangeRates.start();
 }
 
 export default {
