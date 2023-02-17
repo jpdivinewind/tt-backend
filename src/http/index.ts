@@ -1,8 +1,9 @@
 import Fastify from 'fastify';
 import {PORT} from '../config';
+import {log} from '../logger';
 import routes from './routes';
 
-const app = Fastify({logger: true});
+const app = Fastify({logger: log});
 
 routes(app);
 

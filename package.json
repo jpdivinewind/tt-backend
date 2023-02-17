@@ -24,6 +24,7 @@
         "mongoose-paginate-v2": "^1.7.1",
         "node-fetch": "^3.3.0",
         "node-schedule": "^2.1.1",
+        "pino": "^8.10.0",
         "socket.io": "^4.6.0"
     },
     "devDependencies": {
