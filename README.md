@@ -1,5 +1,7 @@
 # tt-backend
 
+time spent: ~2:40
+
 ### ENV:
 ```
 LOG_LEVEL -- default: debug
