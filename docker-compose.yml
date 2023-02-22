@@ -1,7 +1,10 @@
 version: '3'
 services:
     node:
-        build: .
+        build:
+            context: .
+            args:
+                NPM_TOKEN: ${NPM_TOKEN}
         ports:
             - ${PORT}:${PORT}
     mongo:
