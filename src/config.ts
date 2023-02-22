@@ -10,7 +10,7 @@ export const MONGO_URL =
 
 export const PORT = process.env['PORT'] ? parseInt(process.env['PORT']) : 3000;
 
-export const CORS_ORIGIN = process.env['CORS_ORIGIN'] || '*';
+export const CORS_ORIGIN = process.env['CORS_ORIGIN'];
 
 export const JOB_UPDATE_EXCHANGE_RATES_RULE =
     process.env['JOB_UPDATE_EXCHANGE_RATES_RULE'] || '*/2 * * * *'; // every 2 minutes
